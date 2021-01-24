@@ -1,0 +1,30 @@
+{
+  "name": "maqam",
+  "version": "1.0.0",
+  "description": "maqam for production",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedsaiedd/maqam.git"
+  },
+  "keywords": [
+    "maqam"
+  ],
+  "author": "mit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mohamedsaiedd/maqam/issues"
+  },
+  "homepage": "https://github.com/mohamedsaiedd/maqam#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  },
+  "dependencies": {
+    "animejs": "^3.2.1",
+    "sass": "^1.32.2",
+    "title": "^3.4.2"
+  }
+}
