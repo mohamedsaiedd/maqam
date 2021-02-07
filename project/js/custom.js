@@ -1,146 +1,256 @@
-// const fullpath = "M1534.53,0c847.5,0,1534.53,674.286,1534.53,1506.061S2382.028,3012.121,1534.53,3012.121,0,2337.834,0,1506.061,687.033,0,1534.53,0Z";
-
-// const btnpath = "M169.379,0c93.545,0,169.379,73.262,169.379,163.636S262.924,327.273,169.379,327.273,0,254.01,0,163.636,75.833,0,169.379,0Z";
-
-// const darkmode = document.querySelector('.darkmode');
-// let toggle = false;
-
-
-
-// darkmode.addEventListener('click', () => {
-//   const timeline = anime.timeline({
-//     duration: 750,
-//     easing: "easeOutExpo",
-//   });
-//   timeline.add({
-//     targets: ".sun",
-//     d: [{
-//       value:   fullpath 
-//     }],
-//     translateX:  "60%",
-//   }).add({
-//         targets: "body",
-//         backgroundColor: '#000' 
-//       },
-//       "-=750"
-//     )
-// if(!toggle){
-//   toggle=true
-// }else{
-//   toggle=false
-// }
-// })
-
-
-
-
-
-
-
-
-
-
-
-let media = document.querySelector(".media")
-let container = document.querySelector(".container")
-let title = document.querySelector(".title")
-let btn = document.querySelector(".button")
-
-container.addEventListener("mousemove", (e) => {
-  let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
-  let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
-  media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+/* jQuery Pre loader
+ -----------------------------------------------*/
+$(window).load(function() {
+    $('.preloader').fadeOut(1000);
+    // set duration in brackets    
 });
 
+//vars section
+let track = [{ //track[0]
 
-container.addEventListener("mouseenter", (e) => {
-  media.style.transition = "none";
-  btn.style.transform = "translateZ(10px)";
-  title.style.transform = "translateZ(320px)";
-});
+        audio: document.querySelector(".music-audio1"),
+        disk: document.querySelector(".music-disk1"),
+        title: document.querySelector(".music-title1"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio2"),
+        disk: document.querySelector(".music-disk2"),
+        title: document.querySelector(".music-title2"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio3"),
+        disk: document.querySelector(".music-disk3"),
+        title: document.querySelector(".music-title3"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio4"),
+        disk: document.querySelector(".music-disk4"),
+        title: document.querySelector(".music-title4"),
+    }, {
+
+        audio: document.querySelector(".music-audio5"),
+        disk: document.querySelector(".music-disk5"),
+        title: document.querySelector(".music-title5"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio6"),
+        disk: document.querySelector(".music-disk6"),
+        title: document.querySelector(".music-title6"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio7"),
+        disk: document.querySelector(".music-disk7"),
+        title: document.querySelector(".music-title7"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio8"),
+        disk: document.querySelector(".music-disk8"),
+        title: document.querySelector(".music-title8"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio9"),
+        disk: document.querySelector(".music-disk9"),
+        title: document.querySelector(".music-title9"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio10"),
+        disk: document.querySelector(".music-disk10"),
+        title: document.querySelector(".music-title10"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio11"),
+        disk: document.querySelector(".music-disk11"),
+        title: document.querySelector(".music-title11"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio12"),
+        disk: document.querySelector(".music-disk12"),
+        title: document.querySelector(".music-title12"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio13"),
+        disk: document.querySelector(".music-disk13"),
+        title: document.querySelector(".music-title13"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio14"),
+        disk: document.querySelector(".music-disk14"),
+        title: document.querySelector(".music-title14"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio15"),
+        disk: document.querySelector(".music-disk15"),
+        title: document.querySelector(".music-title15"),
+    },
+    {
+
+        audio: document.querySelector(".music-audio16"),
+        disk: document.querySelector(".music-disk16"),
+        title: document.querySelector(".music-title16"),
+    }
+
+];
 
 
-container.addEventListener("mouseleave", (e) => {
-  media.style.transition = "all 0.9s ease";
-  media.style.transform = `rotateY(0deg) rotateX(0deg)`;
-  title.style.transform = "translateZ(320px)";
-});
+const gram = document.getElementById("music-gramophone");
 
 
-let mouseCursor = document.querySelector(".button");
-let imagesHover = document.querySelectorAll(".about-images");
-let textHover = document.querySelector(".about-info-p");
-let homeImageHover = document.querySelector(".img-home");
-let navLinks = document.querySelectorAll(".navbar-nav li");
-let titleText = document.querySelector(".title");
+//loops sections
+for (let i = 0; i < track.length; i++) {
+    var audio = track[i].audio;
+    var disk = track[i].disk;
+    var title;
+    var index;
+    var it = 0;
 
 
-//mouse move detector
-window.addEventListener("mousemove", mouse);
+    disk.addEventListener("dragstart", dragStart);
 
-function mouse(e) {
-  mouseCursor.style.top = e.pageY + "px";
-  mouseCursor.style.left = e.pageX + "px";
+    function dragStart(ev) {
+
+        audio = track[i].audio;
+        disk = track[i].disk;
+        dragged = ev.target;
+        if (it == 0) {
+            index = i;
+            it++;
+        }
+        title = track[i].title;
+        ev.target.style.opacity = .5;
+
+    }
+
+    disk.addEventListener("mousedown", PauseTrack);
+
+    function PauseTrack(e) {
+
+        audio.pause();
+        audio.currentTime = 0;
+        disk.style.opacity = 1;
+        title.classList.remove("music-title-played");
+
+    }
+
+    disk.addEventListener("dragend", function(event) {
+
+        event.target.style.opacity = 0;
+    }, false);
+    disk.addEventListener("dragover", function(event) {
+
+        event.preventDefault();
+
+    }, false);
+
+    disk.addEventListener("mousemove", function(event) {
+
+        gram.style.opacity = "0.7";
+
+        track[i].title.classList.add("music-title-hovered");
+
+    });
+
+    disk.addEventListener("mouseleave", function(event) {
+        gram.style.opacity = "";
+        track[i].title.classList.remove("music-title-hovered")
+    })
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    disk.addEventListener("dragenter", function(event) {
+
+        if (event.target.className == "dropzone") {
+            event.target.style.opacity = "";
+        }
+
+    }, false);
+
+    disk.addEventListener("dragleave", function(event) {
+
+        if (event.target.className == "dropzone") {
+            event.target.style.opacity = "1";
+        }
+
+    }, false);
+
+    gram.addEventListener("drop", function(event) {
+        event.preventDefault();
+        if (event.target.className == "dropzone") {
+            audio.play();
+            gram.style.opacity = 0.4;
+            title.classList.add("music-title-played");
+        }
+    });
 }
 
-var elem = document.getElementById("myVideo");
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//video resize fathallah
+
 
 media.addEventListener("click", openFullscreen)
+window.addEventListener("click", openFullscreen)
+
 function openFullscreen() {
+    elem.currentTime = 80;
+    elem.muted = false;
+    elem.classList.toggle("fullScreen");
+    titleText.classList.toggle("hidden")
+    container.classList.toggle("widthfull")
 
-  elem.classList.add("fullScreen");
+    //cursor pointer
+    if (mouseCursor.innerHTML === "press") {
+        mouseCursor.innerHTML = "close";
+        media.style.transform = "none";
+        container.addEventListener("mousemove", (e) => {
+            media.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
 
+
+    } else {
+        event.preventDefault();
+        mouseCursor.innerHTML = "press";
+        elem.currentTime = 2;
+
+        container.addEventListener("mousemove", (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+            media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+
+        });
+
+        elem.muted = true;
+
+    }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //video resize
 
 
-  media.addEventListener("click", openFullscreen)
-  window.addEventListener("click", openFullscreen)
-  function openFullscreen() {
-  elem.currentTime = 80;
-  elem.muted = false;
-  elem.classList.toggle("fullScreen");
-  titleText.classList.toggle("hidden")
-  container.classList.toggle("widthfull")
 
-  //cursor pointer
-  if (mouseCursor.innerHTML === "press") {
-    mouseCursor.innerHTML = "close";
-    media.style.transform = "none";
-    container.addEventListener("mousemove", (e) => {
-      media.style.transform = `rotateY(0deg) rotateX(0deg)`;
-    });
- 
-    
-  } else {
-    event.preventDefault();
-    mouseCursor.innerHTML = "press";
-    elem.currentTime = 2;
 
-    container.addEventListener("mousemove", (e) => {
-      let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
-      let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
-      media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-      
-    });
 
-    elem.muted = true;
-    
-  }
-}
-
-//mouse hover circular effect
- let imageContain = document.querySelector(".image-contain")
- let imageHoverEffect = document.querySelector(".imageHoverEffect");
- let image3d = document.querySelector(".image3d");
-//  let nothing = document.querySelector(".floar");
- let storke = document.querySelector(".storke");
 
 
 // imageContain.addEventListener("click", circularEffect);
- 
+
 // nothing.addEventListener("mousemove", circularEffect);
 
 //  function circularEffect(e) {
@@ -148,72 +258,8 @@ function openFullscreen() {
 //    imageHoverEffect.classList.add("imageHoverEffect2");
 
 
- 
+
 //  }
-
-
-//omar task "drag and scroll"
- (function() {
-    
-  function scrollHorizontally(e) { // function name
-      e = window.event || e;
-      var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-      document.documentElement.scrollLeft -= (delta*300); // Multiplied by 300
-      document.body.scrollLeft -= (delta*300); // Multiplied by 40
-      
-  }
-  if (window.addEventListener) {
-      // Versions of : IE9, Chrome, Safari, Opera
-      window.addEventListener("mousewheel", scrollHorizontally, false);
-      // Firefox
-      window.addEventListener("DOMMouseScroll", scrollHorizontally, false);
-  } else {
-      // IE 6/7/8
-      window.attachEvent("onmousewheel", scrollHorizontally);
-  }
-})();
-
-var timer;
-document.addEventListener("mousedown", function(){
-   timer=setInterval(function(){
-       document.querySelector(".container").style.cursor = "grabbing";
-   }, 100); // the above code is executed every 100 ms
-});
-document.addEventListener("mouseup", function(){
-  if (timer) clearInterval(timer)
-  document.querySelector(".container").style.cursor = "grab";
-
-});
-
-//drag to scroll method 2
-
-  var curXPos , curYPos , curDown = false;
-  window.addEventListener('mousedown', function(e)
-  { curDown = true;
-  curYPos = e.pageY;
-   curXPos = e.pageX; 
-});
-
-window.addEventListener('mouseup', function(e){ curDown = false; });
-
-window.addEventListener('mousemove', function(e){ 
-  if(curDown === true){
-    window.scrollTo(document.body.scrollLeft + (curXPos - e.pageX), document.body.scrollTop + (curYPos - e.pageY));
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-//  make nothing ends on page button
 
 
 
