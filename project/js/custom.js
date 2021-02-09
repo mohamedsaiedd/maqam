@@ -1,12 +1,8 @@
-/* jQuery Pre loader
- -----------------------------------------------*/
 $(window).load(function() {
     $('.preloader').fadeOut(1000);
-    // set duration in brackets    
 });
 
-//vars section
-let track = [{ //track[0]
+let track = [{
 
         audio: document.querySelector(".music-audio1"),
         disk: document.querySelector(".music-disk1"),
@@ -112,7 +108,7 @@ const gram = document.getElementById("music-gramophone");
 for (let i = 0; i < track.length; i++) {
     var audio = track[i].audio;
     var disk = track[i].disk;
-    var title;
+    var title
     var index;
     var it = 0;
 
@@ -130,30 +126,9 @@ for (let i = 0; i < track.length; i++) {
         }
         title = track[i].title;
         ev.target.style.opacity = .5;
+        console.log(title)
 
-    }
-
-    disk.addEventListener("mousedown", PauseTrack);
-
-    function PauseTrack(e) {
-
-        audio.pause();
-        audio.currentTime = 0;
-        disk.style.opacity = 1;
-        title.classList.remove("music-title-played");
-
-    }
-
-    disk.addEventListener("dragend", function(event) {
-
-        event.target.style.opacity = 0;
-    }, false);
-    disk.addEventListener("dragover", function(event) {
-
-        event.preventDefault();
-
-    }, false);
-
+    };
     disk.addEventListener("mousemove", function(event) {
 
         gram.style.opacity = "0.7";
@@ -161,6 +136,17 @@ for (let i = 0; i < track.length; i++) {
         track[i].title.classList.add("music-title-hovered");
 
     });
+
+    disk.addEventListener("dragend", function(event) {
+
+        event.target.style.opacity = 0;
+    });
+    disk.addEventListener("dragover", function(event) {
+
+        event.preventDefault();
+
+    });
+
 
     disk.addEventListener("mouseleave", function(event) {
         gram.style.opacity = "";
@@ -177,7 +163,7 @@ for (let i = 0; i < track.length; i++) {
             event.target.style.opacity = "";
         }
 
-    }, false);
+    });
 
     disk.addEventListener("dragleave", function(event) {
 
@@ -185,62 +171,48 @@ for (let i = 0; i < track.length; i++) {
             event.target.style.opacity = "1";
         }
 
-    }, false);
+    });
+    disk.addEventListener("mousedown", PauseTrack);
 
+    function PauseTrack(e) {
+
+        audio.pause();
+        audio.currentTime = 0;
+        disk.style.opacity = 1;
+        track[i].title.classList.remove("music-title-played");
+
+    }
     gram.addEventListener("drop", function(event) {
         event.preventDefault();
         if (event.target.className == "dropzone") {
             audio.play();
-            gram.style.opacity = 0.4;
+
             title.classList.add("music-title-played");
+            gram.style.opacity = 0.4;
         }
     });
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//video resize fathallah
+
+//////////////////////////////////////start movies////////////////////////////////////////////////////////
 
 
-media.addEventListener("click", openFullscreen)
-window.addEventListener("click", openFullscreen)
-
-function openFullscreen() {
-    elem.currentTime = 80;
-    elem.muted = false;
-    elem.classList.toggle("fullScreen");
-    titleText.classList.toggle("hidden")
-    container.classList.toggle("widthfull")
-
-    //cursor pointer
-    if (mouseCursor.innerHTML === "press") {
-        mouseCursor.innerHTML = "close";
-        media.style.transform = "none";
-        container.addEventListener("mousemove", (e) => {
-            media.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        });
 
 
-    } else {
-        event.preventDefault();
-        mouseCursor.innerHTML = "press";
-        elem.currentTime = 2;
+var movieStop = document.querySelector('.movie');
+var movieHover = document.querySelector('.movies-overlay');
 
-        container.addEventListener("mousemove", (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
-            media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+movieHover.addEventListener(("mouseover"), () => {
+    movieStop.style.animationPlayState = "paused";
+})
 
-        });
 
-        elem.muted = true;
 
-    }
-}
+//////////////////////////////////////end movies////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

@@ -1,8 +1,9 @@
 @import url(https://necolas.github.io/normalize.css/8.0.1/normalize.css);
 @import url(https://fonts.googleapis.com/css2?family=Tajawal:wght@500&family=Ubuntu:ital,wght@1,500&display=swap);
+@import './merge-style0.0.1.scss';
+// @import './showreel.scss';
 @import './music.scss';
 body {
-    background-color: #000 !important;
     box-sizing: border-box;
     perspective: 1200px;
     display: flex;
@@ -351,4 +352,22 @@ body::-webkit-scrollbar-thumb {
         -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
         box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
     }
+}
+
+body {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-perspective: 1200px;
+    perspective: 1200px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: none !important;
+    width: 12000px;
 }
