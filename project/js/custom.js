@@ -108,7 +108,7 @@ const gram = document.getElementById("music-gramophone");
 for (let i = 0; i < track.length; i++) {
     var audio = track[i].audio;
     var disk = track[i].disk;
-    var title
+    var title;
     var index;
     var it = 0;
 
@@ -130,6 +130,13 @@ for (let i = 0; i < track.length; i++) {
 
     };
     disk.addEventListener("mousemove", function(event) {
+
+        gram.style.opacity = "0.7";
+
+        track[i].title.classList.add("music-title-hovered");
+
+    });
+    disk.addEventListener("touchmove", function(event) {
 
         gram.style.opacity = "0.7";
 
@@ -173,13 +180,14 @@ for (let i = 0; i < track.length; i++) {
 
     });
     disk.addEventListener("mousedown", PauseTrack);
+    disk.addEventListener("touchstart", PauseTrack);
 
     function PauseTrack(e) {
 
         audio.pause();
         audio.currentTime = 0;
         disk.style.opacity = 1;
-        track[i].title.classList.remove("music-title-played");
+        title.classList.remove("music-title-played");
 
     }
     gram.addEventListener("drop", function(event) {
@@ -191,23 +199,118 @@ for (let i = 0; i < track.length; i++) {
             gram.style.opacity = 0.4;
         }
     });
+    gram.addEventListener("touchend", function(event) {
+        event.preventDefault();
+        if (event.target.className == "dropzone") {
+            audio.play();
+
+            title.classList.add("music-title-played");
+            gram.style.opacity = 0.4;
+        }
+    });
+}
+
+
+//////////////////////////////////////start 3d////////////////////////////////////////////////////////
+
+let media = document.querySelector(".media")
+let container = document.querySelector(".video-holder-3d")
+let videotitle = document.querySelector(".title")
+let btn = document.querySelector(".button")
+
+
+
+container.addEventListener("mousemove", (e) => {
+    let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
+    let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+    media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+});
+
+
+container.addEventListener("mouseenter", (e) => {
+    media.style.transition = "none";
+    btn.style.transform = "translateZ(10px)";
+    videotitle.style.transform = "translateZ(320px)";
+});
+
+container.addEventListener("mouseleave", (e) => {
+    media.style.transition = "all 0.9s ease";
+    media.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    videotitle.style.transform = "translateZ(320px)";
+});
+
+
+let mouseCursor = document.querySelector(".button");
+let imagesHover = document.querySelectorAll(".about-images");
+let textHover = document.querySelector(".about-info-p");
+let homeImageHover = document.querySelector(".img-home");
+let navLinks = document.querySelectorAll(".navbar-nav li");
+let titleText = document.querySelector(".title");
+
+
+//mouse move detector
+
+
+window.addEventListener("mousemove", mouse);
+
+function mouse(e) {
+    mouseCursor.style.top = e.pageY + "px";
+    mouseCursor.style.left = e.pageX + "px";
+}
+
+var elem = document.getElementById("myVideo");
+
+window.addEventListener("click", openFullscreen)
+
+function openFullscreen() {
+
+    elem.classList.add("fullScreen");
+
+}
+
+
+//video resize
+elem.muted = true;
+
+media.addEventListener("click", openFullscreen)
+window.addEventListener("click", openFullscreen)
+
+function openFullscreen() {
+    elem.currentTime = 80;
+    elem.muted = false;
+    elem.classList.toggle("fullScreen");
+    titleText.classList.toggle("hidden")
+    container.classList.toggle("widthfull")
+
+    //cursor pointer
+    if (mouseCursor.innerHTML === "press") {
+        mouseCursor.innerHTML = "close";
+        media.style.transform = "none";
+        container.addEventListener("mousemove", (e) => {
+            media.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+
+
+    } else {
+        event.preventDefault();
+        mouseCursor.innerHTML = "press";
+        elem.currentTime = 2;
+
+        container.addEventListener("mousemove", (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 10;
+            media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+
+        });
+        elem.muted = true;
+    }
 }
 
 
 
 
 
-//////////////////////////////////////start movies////////////////////////////////////////////////////////
 
-
-
-
-var movieStop = document.querySelector('.movie');
-var movieHover = document.querySelector('.movies-overlay');
-
-movieHover.addEventListener(("mouseover"), () => {
-    movieStop.style.animationPlayState = "paused";
-})
 
 
 
@@ -219,90 +322,6 @@ movieHover.addEventListener(("mouseover"), () => {
 
 
 
-
-
-// imageContain.addEventListener("click", circularEffect);
-
-// nothing.addEventListener("mousemove", circularEffect);
-
-//  function circularEffect(e) {
-
-//    imageHoverEffect.classList.add("imageHoverEffect2");
-
-
-
-//  }
-
-
-
-
-//  /* jQuery Pre loader
-//   -----------------------------------------------*/
-//   $(window).load(function(){
-//     $('.preloader').fadeOut(1000); 
-//     // set duration in brackets    
-// });
-
-
-
-//   /* Home Slideshow Vegas
-//   -----------------------------------------------*/
-
-//    /* Back top
-//   -----------------------------------------------*/
-//     $(window).scroll(function() {
-//         if ($(this).scrollTop() > 200) {
-//         $('.go-top').fadeIn(200);
-//         } else {
-//           $('.go-top').fadeOut(200);
-//         }
-//         });   
-//         // Animate the scroll to top
-//       $('.go-top').click(function(event) {
-//         event.preventDefault();
-//       $('html, body').animate({scrollTop: 0}, 300);
-//       })
-
-
-//   /* wow
-//   -------------------------------*/
-//   new WOW({ mobile: true }).init();
-
-//   $(function () {
-//     $(document).scroll(function () {
-//       var $nav = $(".fixed-top");
-//       var $navLink = $(".nav-link");
-//       var $bar1 = $(".bar1");
-//       var $bar2 = $(".bar2");
-//       var $bar3 = $(".bar3"); 
-
-//       $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-//       $navLink.toggleClass('scrolle', $(this).scrollTop() > $nav.height());
-//       $bar1.toggleClass('scroll1', $(this).scrollTop() > $nav.height());
-//       $bar2.toggleClass('scroll2', $(this).scrollTop() > $nav.height());
-//       $bar3.toggleClass('scroll3', $(this).scrollTop() > $nav.height());
-//       ;
-//     });
-//   });
-
-
-//   function myFunction(x) {
-//     x.classList.toggle("change");
-//     }
-
-// function douple(x) {
-//   x.classList.toggle("up");
-// }
-//    $(".links ul li a").click(function () {
-//      $('html , body').animate({
-//        scrollTop: $('#' + $(this).data('value')).offset().top
-//      }, 1000)
-//    })
-//    $(".contact-btn").click(function () {
-//     $('html , body').animate({
-//       scrollTop: $('#' + $(this).data('value')).offset().top
-//     }, 1000)
-//   })
 
 // // language code
 
