@@ -2,6 +2,8 @@ $(window).load(function() {
     $('.preloader').fadeOut(1000);
 });
 
+
+
 let track = [{
 
         audio: document.querySelector(".music-audio1"),
@@ -213,17 +215,18 @@ for (let i = 0; i < track.length; i++) {
 
 //////////////////////////////////////start 3d////////////////////////////////////////////////////////
 
-let media = document.querySelector(".media")
-let container = document.querySelector(".video-holder-3d")
-let videotitle = document.querySelector(".title")
-let btn = document.querySelector(".button")
-
+let media = document.querySelector(".video-media")
+let container = document.querySelector(".video-holder")
+let videotitle = document.querySelector(".video-title")
+let btn = document.querySelector(".video-button")
+var elem = document.getElementById("myVideo");
 
 
 container.addEventListener("mousemove", (e) => {
-    let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
-    let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
-    media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    let xAxis = (window.innerWidth / 2 - e.pageX + 100) / 40;
+    let yAxis = (window.innerHeight / 2 - e.pageY + 100) / 40;
+    media.style.transform = `rotateY(${xAxis +100}deg) rotateX(${yAxis}deg)`;
+
 });
 
 
@@ -240,12 +243,12 @@ container.addEventListener("mouseleave", (e) => {
 });
 
 
-let mouseCursor = document.querySelector(".button");
+let mouseCursor = document.querySelector(".video-button");
 let imagesHover = document.querySelectorAll(".about-images");
 let textHover = document.querySelector(".about-info-p");
 let homeImageHover = document.querySelector(".img-home");
 let navLinks = document.querySelectorAll(".navbar-nav li");
-let titleText = document.querySelector(".title");
+let titleText = document.querySelector(".video-title");
 
 
 //mouse move detector
@@ -258,25 +261,20 @@ function mouse(e) {
     mouseCursor.style.left = e.pageX + "px";
 }
 
-var elem = document.getElementById("myVideo");
 
-window.addEventListener("click", openFullscreen)
 
-function openFullscreen() {
-
-    elem.classList.add("fullScreen");
-
-}
 
 
 //video resize
 elem.muted = true;
 
-media.addEventListener("click", openFullscreen)
-window.addEventListener("click", openFullscreen)
+elem.addEventListener("click", openFullscreen)
+
+container.addEventListener("click", openFullscreen)
+
 
 function openFullscreen() {
-    elem.currentTime = 80;
+    elem.currentTime = 120;
     elem.muted = false;
     elem.classList.toggle("fullScreen");
     titleText.classList.toggle("hidden")
@@ -292,20 +290,19 @@ function openFullscreen() {
 
 
     } else {
-        event.preventDefault();
+
         mouseCursor.innerHTML = "press";
         elem.currentTime = 2;
 
         container.addEventListener("mousemove", (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 10;
-            media.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            let xAxis = (window.innerWidth / 2 - e.pageX + 100) / 40;
+            let yAxis = (window.innerHeight / 2 - e.pageY + 100) / 40;
+            media.style.transform = `rotateY(${xAxis +100}deg) rotateX(${yAxis }deg)`;
 
         });
         elem.muted = true;
     }
 }
-
 
 
 

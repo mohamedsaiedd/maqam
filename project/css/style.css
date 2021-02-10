@@ -1258,34 +1258,33 @@ margin-left: 60px;
 
 @import url(https://necolas.github.io/normalize.css/8.0.1/normalize.css);
 @import url(https://fonts.googleapis.com/css2?family=Tajawal:wght@500&family=Ubuntu:ital,wght@1,500&display=swap);
-.video-holder-3d {}
-
-.title {
-    position: absolute;
+.video-title {
+    position: relative;
     font-size: 170px;
-    top: 45%;
-    left: 15%;
     -webkit-text-stroke-width: 4px;
     -webkit-text-stroke-color: rgba(255, 255, 255, 0.658);
-    color: transparent;
+    color: #222;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.media {
-    min-height: 80vh;
-    width: 100%;
+.video-media {
+    position: absolute;
+    height: 50%;
+    width: 50%;
+    -webkit-perspective: 1200px;
+    perspective: 2200px;
 }
 
 .video-holder {
     height: 100vh !important;
     width: 100vw !important;
     -webkit-perspective: 1200px;
-    perspective: 5200px;
+    perspective: 2200px;
 }
 
-.button {
+.video-button {
     border: 1px solid rgba(0, 0, 0, 0.438);
     position: absolute;
     -webkit-transform: translate(-50%, -50%);
@@ -1318,12 +1317,6 @@ margin-left: 60px;
     -ms-flex-pack: center;
     justify-content: center;
     z-index: 5;
-}
-
-.full {
-    padding-top: 0%;
-    cursor: pointer;
-    background-size: cover;
 }
 
 .corser {
@@ -1366,15 +1359,22 @@ video::-webkit-media-controls {
 }
 
 .fullScreen {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 110vw;
-    height: 130vh;
+    position: relative;
+    top: 0 !important;
+    right: 0 !important;
+    width: 100vw;
+    height: 110vh;
     padding-top: 0%;
     -webkit-transform-style: flat;
     transform-style: flat;
     background-size: cover;
+    padding-left: 0% !important;
+    padding-top: 0% !important;
+}
+
+video {
+    width: 100%;
+    height: 100%;
 }
 
 .cursor {
@@ -1421,7 +1421,7 @@ video::-webkit-media-controls {
 }
 
 @media only screen and (max-width: 900px) {
-    .title {
+    .video-title {
         font-size: 60px;
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: rgba(255, 255, 255, 0.658);
