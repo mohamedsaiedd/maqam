@@ -223,8 +223,8 @@ var elem = document.getElementById("myVideo");
 
 
 container.addEventListener("mousemove", (e) => {
-    let xAxis = (window.innerWidth / 2 - e.pageX + 100) / 40;
-    let yAxis = (window.innerHeight / 2 - e.pageY + 100) / 40;
+    let xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+    let yAxis = (window.innerHeight / 2 - e.pageY) / 50;
     media.style.transform = `rotateY(${xAxis +100}deg) rotateX(${yAxis}deg)`;
 
 });
@@ -268,7 +268,7 @@ function mouse(e) {
 //video resize
 elem.muted = true;
 
-elem.addEventListener("click", openFullscreen)
+media.addEventListener("click", openFullscreen)
 
 container.addEventListener("click", openFullscreen)
 
@@ -281,7 +281,7 @@ function openFullscreen() {
     container.classList.toggle("widthfull")
 
     //cursor pointer
-    if (mouseCursor.innerHTML === "press") {
+    if (mouseCursor.innerHTML == "press") {
         mouseCursor.innerHTML = "close";
         media.style.transform = "none";
         container.addEventListener("mousemove", (e) => {
@@ -295,8 +295,8 @@ function openFullscreen() {
         elem.currentTime = 2;
 
         container.addEventListener("mousemove", (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX + 100) / 40;
-            let yAxis = (window.innerHeight / 2 - e.pageY + 100) / 40;
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 50;
             media.style.transform = `rotateY(${xAxis +100}deg) rotateX(${yAxis }deg)`;
 
         });
@@ -308,15 +308,144 @@ function openFullscreen() {
 
 
 
+///////////////movies-second-version/////////
 
+document.querySelector('.movies2-first-poster').addEventListener('mousemove', parallax);
+document.querySelector('.movies2-second-poster').addEventListener('mousemove', parallax);
+document.querySelector('.movies2-third-poster').addEventListener('mousemove', parallax);
+document.querySelector('.overlayer').addEventListener('mousemove', parallax);
+
+function parallax(e) {
+    this.querySelectorAll('.layer').forEach(layer => {
+        const speed = layer.getAttribute('data-speed')
+        const x = (window.innerWidth - e.pageX * speed) / 50
+        const y = (window.innerHeight - e.pageY * speed) / 50
+
+        layer.style.transform = `translateX(${x}px) translateY(${y}px)`
+    })
+}
+
+
+
+// ///////////////////////////////MOVIES-SECTION//////////////////////
+// var moviesCursor1 = document.querySelector('.movies-section')
+// var cursor1 = document.querySelector(".movies-cursor");
+
+// moviesCursor1.addEventListener("mousemove", moviesMouse);
+
+// function moviesMouse(e) {
+//     cursor1.style.top = (e.pageY) + "px";
+//     cursor1.style.left = (e.pageX) + "px";
+// }
+
+// ///////
+// var des1 = document.querySelector("#description1");
+// var des2 = document.querySelector("#description2");
+// var des3 = document.querySelector("#description3");
+
+// function pa(x, x2, x3) {
+//     let x1 = document.querySelector("#" + x);
+//     let getNone1 = document.querySelector("#" + x3);
+//     let getNone2 = document.querySelector("#" + x2);
+
+//     getNone1.style.display = "none";
+//     x1.style.display = "block";
+//     getNone2.style.display = "none";
+// };
 
 
 //////////////////////////////////////end movies////////////////////////////////////////////////////////
 
+(function() {
+
+    function scrollHorizontally(e) { // function name
+        e = window.event || e;
+        var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+        document.documentElement.scrollLeft -= (delta * 300); // Multiplied by 300
+        document.body.scrollLeft -= (delta * 300); // Multiplied by 40
+
+    }
+
+    if (window.addEventListener) {
+        // Versions of : IE9, Chrome, Safari, Opera
+        window.addEventListener("mousewheel", scrollHorizontally, false);
+        // Firefox
+        window.addEventListener("DOMMouseScroll", scrollHorizontally, false);
+    } else {
+        // IE 6/7/8
+        window.attachEvent("onmousewheel", scrollHorizontally);
+    }
+})();
+
+
+// // smooth scrolling section
+// const body = document.body,
+//     scrollWrap = document.getElementsByClassName("container")[0],
+//     width = scrollWrap.getBoundingClientRect().width - 1,
+//     speed = 0.04;
+
+// var offset = 0;
+
+// body.style.width = Math.floor(width) + "px";
 
 
 
 
+// function smoothScroll() {
+//     offset += (window.pageXOffset - offset) * speed;
+
+//     var scroll = "translateX(-" + offset + "px) translateZ(0)";
+//     body.style.transform = scroll;
+
+//     callScroll = requestAnimationFrame(smoothScroll);
+// }
+
+// smoothScroll();
+
+
+// // // keep mouse shape to grab as long as mouse down
+
+// var timer;
+// document.addEventListener("mousedown", function() {
+//     timer = setInterval(function() {
+//         document.querySelector(".container").style.cursor = "grabbing";
+//     }, 100); // the above code is executed every 100 ms
+// });
+// document.addEventListener("mouseup", function() {
+//     if (timer) clearInterval(timer)
+//     document.querySelector(".container").style.cursor = "grab";
+
+// });
+
+// // //drag to scroll method 2
+// function scroller() {
+
+//     var curXPos, curYPos, curDown = false; //resetting cursor position according to 2-d axis, detecting mouse click to false
+//     window.addEventListener('mousedown', function(e) {
+//         curDown = true; //detect the mouse is clicked
+//         curXPos = e.pageX; //assign curYpos to the mouse position on the page y axis
+//         console.log("click")
+//     });
+
+//     window.addEventListener('mouseup', function(e) { curDown = false; }); // in case of mouse not clicked sleft indicating mouse state
+
+//     window.addEventListener('mousemove', function(e) { //do a function if
+//         if (curDown === true) { // check if mouse is clicked
+
+
+//             window.scrollBy(document.body.scrollLeft + (curXPos - e.pageX), 0); // move scroll of the page according to mouse directions (opposite)
+//             document.body.style.filter = "blur(0.8px)";
+
+
+//         }
+//         if (curDown === false) {
+//             document.body.style.filter = "blur(0px)";
+
+//         }
+//     });
+
+// }
+// scroller();
 
 
 
