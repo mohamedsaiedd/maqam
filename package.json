@@ -25,6 +25,6 @@
   "dependencies": {
     "animejs": "^3.2.1",
     "sass": "^1.32.2",
-    "title": "^3.4.2"
+    "title": "^3.4.3"
   }
 }
